@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
       await Stripe.instance
           .initPaymentSheet(
           paymentSheetParameters: SetupPaymentSheetParameters(
-              setupIntentClientSecret: 'sk_test_51NcmD3SHJpgu98pmurnK6pkqyPcYf1WNpwMeOTZFEOmPM7jhymZzJDnIoRqJWVNcxizrGPBMh4rmRfNhfaQTScVC00o79o3t9H',
+              setupIntentClientSecret: '',
               paymentIntentClientSecret:
               paymentIntentData!['client_secret'],
               //applePay: PaymentSheetApplePay.,
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Uri.parse('https://api.stripe.com/v1/payment_intents'),
           body: body,
           headers: {
-            'Authorization': 'Bearer ' + 'sk_test_51NcmD3SHJpgu98pmurnK6pkqyPcYf1WNpwMeOTZFEOmPM7jhymZzJDnIoRqJWVNcxizrGPBMh4rmRfNhfaQTScVC00o79o3t9H',
+            'Authorization': 'Bearer ' + '',
             'Content-Type': 'application/x-www-form-urlencoded'
           });
       print('Create Intent reponse ===> ${response.body.toString()}');
