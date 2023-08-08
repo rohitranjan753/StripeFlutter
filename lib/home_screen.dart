@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
       await Stripe.instance
           .initPaymentSheet(
           paymentSheetParameters: SetupPaymentSheetParameters(
-              setupIntentClientSecret: 'Your Secret Key',
+              setupIntentClientSecret: 'sk_test_51NcmD3SHJpgu98pmurnK6pkqyPcYf1WNpwMeOTZFEOmPM7jhymZzJDnIoRqJWVNcxizrGPBMh4rmRfNhfaQTScVC00o79o3t9H',
               paymentIntentClientSecret:
               paymentIntentData!['client_secret'],
               //applePay: PaymentSheetApplePay.,
@@ -107,30 +107,31 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 
-  createPaymentIntent(String amount,String currency) async {
-    try{
-      Map<String,dynamic> body = {
-        'amount': calculateAmount(amount),
-        'currency':currency,
-        'payment_method_types[]': 'card'
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount': calculateAmount('20'),
+        'currency': currency,
+        'payment_method_types[]': 'card',
       };
-
-      var response = await http.post(Uri.parse('https://api.stripe.com/v1/payment_intents'),
-      body: body,
-        headers: {
-        'Authorization': 'Bearer https://api.stripe.com/v1/payment_intents',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      );
+      print(body);
+      var response = await http.post(
+          Uri.parse('https://api.stripe.com/v1/payment_intents'),
+          body: body,
+          headers: {
+            'Authorization': 'Bearer ' + 'sk_test_51NcmD3SHJpgu98pmurnK6pkqyPcYf1WNpwMeOTZFEOmPM7jhymZzJDnIoRqJWVNcxizrGPBMh4rmRfNhfaQTScVC00o79o3t9H',
+            'Content-Type': 'application/x-www-form-urlencoded'
+          });
       print('Create Intent reponse ===> ${response.body.toString()}');
       return jsonDecode(response.body);
-    }catch(e){
-      print('Exception'+e.toString());
+    } catch (err) {
+      print('err charging user: ${err.toString()}');
     }
   }
-  calculateAmount(String amount){
-    final price = int.parse(amount) * 100;
-    return price;
+
+  calculateAmount(String amount) {
+    final a = (int.parse(amount)) * 100;
+    return a.toString();
   }
 
 }
